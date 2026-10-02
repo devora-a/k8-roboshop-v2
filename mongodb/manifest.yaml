@@ -22,7 +22,25 @@ spec:
     component: mongodb
     tier: db
 ---
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: roboshop
+  labels:
+    project: roboshop
+    component: mongodb
+    tier: db
+spec:
+  ports:
+  - protocol: TCP
+    port: 27017 # service port
+    targetPort: 27017 # container port
+  selector:
+    project: roboshop
+    component: mongodb
+    tier: db
+---    
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
