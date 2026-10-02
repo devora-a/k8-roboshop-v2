@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: mongodb-headless
   namespace: roboshop
-labels:
-  project: roboshop
-  component: mongodb
-  tier: db
+  labels:
+    project: roboshop
+    component: mongodb
+    tier: db
 spec:
   selector:
     project: roboshop
