@@ -5,7 +5,7 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    component: mongodb
+    component: mongodb   # headless service is used for statefulset to create a stable network identity for each pod
     tier: db
 spec:
   selector:
@@ -29,7 +29,7 @@ metadata:
   namespace: roboshop
   labels:
     project: roboshop
-    component: mongodb
+    component: mongodb       #service is used for external access to the mongodb statefulset
     tier: db
 spec:
   ports:
@@ -42,7 +42,7 @@ spec:
     tier: db
 ---    
 apiVersion: apps/v1
-kind: StatefulSet
+kind: StatefulSet    #statefulset is used to manage the mongodb pods and provide stable network identity and persistent storage
 metadata:
   name: mongodb
   namespace: roboshop
@@ -53,7 +53,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      project: roboshop
+      project: roboshop     #statefulset uses this selector to identify the pods it manages
       component: mongodb
       tier: db
   serviceName: "mongodb-headless"
